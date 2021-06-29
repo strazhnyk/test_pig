@@ -12,7 +12,7 @@ python3 -m app.app
 
 | Env                 | Description                                | Default                                                            |
 | ------------------- | ------------------------------------------ | ------------------------------------------------------------------ |
-| `DB_NAME`           | name of DB                           | `api`                                                                 |
+| `DB_NAME`           | DB_NAME                          | `api`                                                                 |
 | `DB_HOST`         | DB_HOST                                 | `localhost`                                                                   |
 | `DB_USER`         | DB_USER                                 | `api`                                                                   |
 | `DB_PASS`         | DB_PASS                                 | `1234qwe`                                                                   |
