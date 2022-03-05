@@ -10,9 +10,6 @@ from .config import API_PREFIX, APP_HOST, APP_PORT, APP_VERSION, PRODUCTION_DATA
 from app.support.request_handling import read_user_attributes_from_request  # noqa
 
 
-
-
-
 app = Flask(__name__)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
