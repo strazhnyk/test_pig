@@ -1,3 +1,5 @@
+[![](http://github-actions.40ants.com/ei-roslyakov/flask-api/matrix.svg)](https://github.com/ei-roslyakov/flask-api/blob/main/.github/workflows/tests.yml)
+
 # How to run API
 
 ## You have to install all libraries using command (in app folder)
