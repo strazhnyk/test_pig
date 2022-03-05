@@ -27,14 +27,15 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checks-out repo
+      # Checks-out repo
       - uses: actions/checkout@v2
 
+      # Install Python
       - name: install Python
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-
+          
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
