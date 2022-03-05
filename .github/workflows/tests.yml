@@ -1,28 +1,24 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
 env:
-  PYTHON_VERSION  : "3.6"
   APP_DIR         : "./api"
   TEST_DIR        : "./api"
-# Controls when the workflow will run
+
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      python_version:
+        description: 'Python version'     
+        required: true
+        default: '3.6'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    strategy:
-      matrix:
-        python-version: [3.6]
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -34,7 +30,7 @@ jobs:
       - name: install Python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ github.event.inputs.python_version }}
           
       - name: Install dependencies
         run: |
