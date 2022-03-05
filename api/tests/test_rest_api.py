@@ -62,7 +62,7 @@ def test_version_route_returns_data(test_app, test_db):
     my_app = webtest.TestApp(test_app)
     resp = my_app.get(API_PREFIX + "/version")
 
-    assert resp.status_int == 200
+    assert resp.status_int == 201
     assert resp.json
 
     required_attributes = [
