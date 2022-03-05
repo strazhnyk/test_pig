@@ -1,3 +1,4 @@
+![example workflow](https://github.com/ei-roslyakov/flask-api/actions/workflows/tests.yml/badge.svg)
 # How to run API
 
 ## You have to install all libraries using command (in app folder)
