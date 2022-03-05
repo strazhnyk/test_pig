@@ -27,23 +27,14 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out repo
+      - name: Checks-out repo
       - uses: actions/checkout@v2
 
-      # Get list of files
-      - name: List directory
-        run: ls -al
-
-      - name: List directory
-        run: ls -al
-        working-directory: ${{ env.TEST_DIR }}
-
-      # Install Python
       - name: install Python
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -52,7 +43,11 @@ jobs:
         working-directory: ${{ env.APP_DIR }}
 
       - name: Lint with flake8
-        run: flake8 .
-      # - name: Test with pytest
-      #   run: |
-      #     pytest
+        run: |
+          flake8 .
+        working-directory: ${{ env.APP_DIR }}
+
+      - name: Test with pytest
+        run: |
+          pytest
+        working-directory: ${{ env.APP_DIR }}
