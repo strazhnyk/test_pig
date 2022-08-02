@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: docker/build-push-action@v1.1.0
-    - name: Build the Docker image
-      run: docker build ./api/Dockerfile
+    - name: Build and push image
+      uses: docker/build-push-action@v1.1.0
+      with:
+        repository: hw_back_${{ env.BRANCH_NAME }}
+        dockerfile: ./api/Dockerfile
+        tags: new
