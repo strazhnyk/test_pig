@@ -11,7 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Build and push image
+
+    - uses: actions/checkout@v2
+    
+    - name: Extract branch name
+      shell: bash
+      run: |
+        echo "::set-env name=BRANCH_NAME::${GITHUB_REF##*/}"
+        echo "${{ env.BRANCH_NAME }}"
+
+    - name: Build
       uses: docker/build-push-action@v1.1.0
       with:
         repository: hw_back_${{ env.BRANCH_NAME }}
