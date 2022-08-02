@@ -1,10 +1,10 @@
-name: Docker Image CI
+name: Docker Flask CI
+env:
+   EB_APPLICATION_NAME: "Flask"
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    - master
 
 jobs:
 
