@@ -13,4 +13,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build /home/runner/work/test_pig/test_pig/api --file Dockerfile --tag my_image_name:$(date +%s)
+      run: docker build .
