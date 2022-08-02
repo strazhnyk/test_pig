@@ -9,11 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build image
-      uses: docker/build-push-action@v2
-      with:
-        context: ./
-        file: api/Dockerfile
-        push: false
-        tags: flask_test
-        target: runner
+    - name: Docker build and push
+        run:|
+          docker build ./api/ --file Dockerfile
