@@ -10,9 +10,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build image
-    - uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v2
       with:
-        context: .
+        context: ./
         file: api/Dockerfile
         push: false
         tags: flask_test
