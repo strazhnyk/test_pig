@@ -8,10 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      name: Docker build and push
-        run:|
-          docker build ./api/ -t flask --file Dockerfile
     #Setup key
     - run: set -eu
     - run: mkdir "$HOME/.ssh"
@@ -19,4 +15,9 @@ jobs:
     - run: chmod 600 "$HOME/.ssh/key"
     # Deploy
     - run: rsync -e "ssh -p 22 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@65.21.61.198:/root/flask
+    # Docker
     - run: docker run flask
+    - uses: actions/checkout@v2
+      name: Docker build and push
+        run:|
+          docker build ./api/ -t flask --file Dockerfile
