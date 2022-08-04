@@ -7,16 +7,13 @@ on:
 jobs:
   build_and_pub:
     runs-on: ubuntu-latest
-    env:
-      LOGIN: ${{ secrets.DOCKER_LOGIN }}
-      NAME: ${{ secrets.DOCKER_NAME }}
     steps:
     - name: Login to docker.io
       run: echo ${{ secrets.DOCKER_PWD }} | docker login --username ${{ secrets.DOCKER_LOGIN }} --password-stdin
     - uses: actions/checkout@v2
       name: Docker build and push
         run:|
-          docker build ./api/ -t flask --file Dockerfile && docker push $LOGIN/$NAME:${GITHUB_REF}
+          docker build ./api/ -t flask --file Dockerfile && docker push ${{ secrets.DOCKER_LOGIN }}/${{ secrets.DOCKER_NAME }}:${GITHUB_REF}
 
 #   deploy:
 #    needs: build_and_pub
