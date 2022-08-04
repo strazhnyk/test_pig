@@ -17,7 +17,7 @@ jobs:
     # Deploy
     - run: rsync -e "ssh -p 22 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@65.21.61.198:/root/flask
     # Docker
-      name: Docker build and push
+    - name: Docker build and push
         run:|
           docker build ./api/ -t flask --file Dockerfile
           docker run flask -d
