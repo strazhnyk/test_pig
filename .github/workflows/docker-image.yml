@@ -5,22 +5,25 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build_and_pub:
     runs-on: ubuntu-latest
+    env:
+      LOGIN: ${{ secrets.DOCKER_LOGIN }}
+      NAME: ${{ secrets.DOCKER_NAME }}
     steps:
-     - uses: actions/checkout@v2
-     - name: Docker build and push
-      run:|
-        docker build ./api/ -t flask --file Dockerfile
+    - name: Login to docker.io
+      run: echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
+    - uses: actions/checkout@v2
+      name: Docker build and push
+        run:|
+          docker build ./api/ -t flask --file Dockerfile && docker push $LOGIN/$NAME:${GITHUB_REF}
 
-   deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-     - uses: actions/checkout@v2
-     - run: set -eu
-     - run: mkdir "$HOME/.ssh"
-     - run: echo "${{ secrets.KEY }}" > "$HOME/.ssh/key"
-     - run: chmod 600 "$HOME/.ssh/key"
-     # Deploy
-     - run: rsync -e "ssh -p 22 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@65.21.61.198:/root/flask
+#   deploy:
+#    needs: build_and_pub
+#    runs-on: ubuntu-latest
+#    steps:
+#     - uses: actions/checkout@v2
+#     - run: set -eu
+#     - run: mkdir "$HOME/.ssh"
+#     - run: echo "${{ secrets.KEY }}" > "$HOME/.ssh/key"
+#     - run: chmod 600 "$HOME/.ssh/key"
