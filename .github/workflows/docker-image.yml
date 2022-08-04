@@ -12,7 +12,7 @@ jobs:
       NAME: ${{ secrets.DOCKER_NAME }}
     steps:
     - name: Login to docker.io
-      run: echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
+      run: docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PWD }}
     - uses: actions/checkout@v2
       name: Docker build and push
         run:|
