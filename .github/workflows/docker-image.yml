@@ -12,7 +12,7 @@ jobs:
       run: echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
     - uses: actions/checkout@v2
     - name: Docker build
-      run: docker build ./api/ -t flask --file Dockerfile
+      run: docker build /api/ -t flask --file Dockerfile .
     - name: Docker push
       run: docker push ${{ secrets.DOCKER_LOGIN }}/flask:0.1
 
