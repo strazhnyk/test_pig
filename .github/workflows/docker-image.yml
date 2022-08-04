@@ -18,5 +18,5 @@ jobs:
     - run: echo "${{ secrets.KEY }}" > "$HOME/.ssh/key"
     - run: chmod 600 "$HOME/.ssh/key"
     # Deploy
-    - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@65.21.61.198:/root/flask
+    - run: rsync -e "ssh -p 22 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@65.21.61.198:/root/flask
     - run: docker run flask
