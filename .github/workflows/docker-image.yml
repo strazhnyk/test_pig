@@ -1,4 +1,4 @@
-name: Docker Flask CI
+name: Docker Flask CI/CD
 
 on:
   push:
@@ -8,16 +8,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    #Setup key
-    - run: set -eu
-    - run: mkdir "$HOME/.ssh"
-    - run: echo "${{ secrets.KEY }}" > "$HOME/.ssh/key"
-    - run: chmod 600 "$HOME/.ssh/key"
-    # Deploy
-    - run: rsync -e "ssh -p 22 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@65.21.61.198:/root/flask
-    # Docker
-    - name: Docker build and push
-        run:|
-          docker build ./api/ -t flask --file Dockerfile
-          docker run flask -d
+     - uses: actions/checkout@v2
+     - name: Docker build and push
+      run:|
+        docker build ./api/ -t flask --file Dockerfile
+
+   deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+     - uses: actions/checkout@v2
+     - run: set -eu
+     - run: mkdir "$HOME/.ssh"
+     - run: echo "${{ secrets.KEY }}" > "$HOME/.ssh/key"
+     - run: chmod 600 "$HOME/.ssh/key"
+     # Deploy
+     - run: rsync -e "ssh -p 22 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . root@65.21.61.198:/root/flask
