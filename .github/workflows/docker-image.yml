@@ -16,7 +16,7 @@ jobs:
     - name: Docker push
       run: docker push ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
 
-   deploy:
+  deploy:
     needs: build_and_pub
     runs-on: ubuntu-latest
     steps:
