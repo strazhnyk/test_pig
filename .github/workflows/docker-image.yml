@@ -12,16 +12,12 @@ jobs:
       run: echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
     - uses: actions/checkout@v2
     - name: Docker build
-      run: docker build ./api/ -t ${{ secrets.DOCKER_LOGIN }}/flask:0.1
+      run: docker build ./api/ -t ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
     - name: Docker push
-      run: docker push ${{ secrets.DOCKER_LOGIN }}/flask:0.1
+      run: docker push ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
 
 #   deploy:
 #    needs: build_and_pub
 #    runs-on: ubuntu-latest
 #    steps:
 #     - uses: actions/checkout@v2
-#     - run: set -eu
-#     - run: mkdir "$HOME/.ssh"
-#     - run: echo "${{ secrets.KEY }}" > "$HOME/.ssh/key"
-#     - run: chmod 600 "$HOME/.ssh/key"
