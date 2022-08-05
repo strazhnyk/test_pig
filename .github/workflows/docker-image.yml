@@ -29,4 +29,4 @@ jobs:
        port: 22
        script: |
            docker pull ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
-           docker run ${GITHUB_REF:11}
+           docker run ${{ secrets.DOCKER_LOGIN }}/flask -d
