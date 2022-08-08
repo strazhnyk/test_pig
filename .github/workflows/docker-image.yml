@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Deploy compose usign ssh
-      uses: wshihadeh/docker-deployment-action@v2
+      uses: TapTap21/docker-remote-deployment-action@v1.0
       with:
        remote_docker_host: deploy@65.21.61.198
        ssh_private_key: ${{ secrets.PRIVATE_KEY }}
@@ -46,4 +46,4 @@ jobs:
        copy_stack_file: true
        deploy_path: /home/deploy
        stack_file_name: docker-compose.yml
-       args: up
+       args: -p flask -d up
