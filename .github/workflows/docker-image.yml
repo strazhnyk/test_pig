@@ -44,5 +44,6 @@ jobs:
        ssh_private_key: ${{ secrets.PRIVATE_KEY }}
        ssh_public_key: ${{ secrets.KEY }}
        copy_stack_file: true
+       deploy_path: /home/deploy
        stack_file_name: docker-compose.yml
        args: up
