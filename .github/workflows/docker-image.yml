@@ -28,6 +28,7 @@ jobs:
        key: ${{ secrets.KEY }}
        port: 22
        script: |
+           curl https://github.com/strazhnyk/test_pig/blob/main/docker-compose.yml
            docker stop $(docker ps -a)
            docker system prune -a -f
            docker rmi $(docker images -a -q)
