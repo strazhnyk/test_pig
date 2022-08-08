@@ -41,7 +41,7 @@ jobs:
       uses: wshihadeh/docker-deployment-action@v2
       with:
        remote_docker_host: deploy@65.21.61.198
-       ssh_private_key: ${{ secrets.PRIVAT_KEY }}
+       ssh_private_key: ${{ secrets.PRIVATE_KEY }}
        ssh_public_key: ${{ secrets.KEY }}
        stack_file_name: docker-compose.yml
-       args: my_application
+       args: flask
