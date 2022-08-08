@@ -11,6 +11,8 @@ jobs:
     - name: Login to docker.io
       run: echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
     - uses: actions/checkout@v2
+    - name: send dockerfile
+      run: scp -i ${{ secrets.KEY }} deploy@65.21.61.198:./docker-compose.yml /home/deploy
     - name: Docker build
       run: docker build ./api/ -t ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
     - name: Docker push
