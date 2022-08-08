@@ -44,4 +44,4 @@ jobs:
        ssh_private_key: ${{ secrets.PRIVATE_KEY }}
        ssh_public_key: ${{ secrets.KEY }}
        stack_file_name: docker-compose.yml
-#       args: docker compose -f $INPUT_STACK_FILE_NAME
+       args: docker-compose -f $INPUT_STACK_FILE_NAME
