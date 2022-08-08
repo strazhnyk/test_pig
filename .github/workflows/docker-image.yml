@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: add SSH
-      uses: shimatoro/ssh-key-action@v2
+      uses: shimataro/ssh-key-action@v2.3.1
       with:
         key: ${{ secrets.PRIVATE_KEY }}
         known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
