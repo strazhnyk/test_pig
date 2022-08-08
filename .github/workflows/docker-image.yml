@@ -28,8 +28,8 @@ jobs:
        key: ${{ secrets.KEY }}
        port: 22
        script: |
-           docker kill $(docker ps -q)
-           docker prune -a
+           docker stop $(docker ps -a)
+           docker system prune -a -f
            docker rmi $(docker images -a -q)
            docker-compose up
 #           docker pull ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
