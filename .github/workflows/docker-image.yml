@@ -57,6 +57,7 @@ jobs:
       with:
         key: ${{ secrets.PRIVATE_KEY }}
         known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+        if_key_exists: replace
     - name: deploy
       uses: JorgenVatle/docker-compose-deploy@v1.0
       with:
