@@ -11,8 +11,6 @@ jobs:
     - name: Login to docker.io
       run: echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
     - uses: actions/checkout@v2
-    - name: send dockerfile
-      run: scp -i ${{ secrets.KEY }} deploy@65.21.61.198:./docker-compose.yml /home/deploy
     - name: Docker build
       run: docker build ./api/ -t ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
     - name: Docker push
@@ -30,7 +28,6 @@ jobs:
        key: ${{ secrets.KEY }}
        port: 22
        script: |
-           curl https://github.com/strazhnyk/test_pig/blob/main/docker-compose.yml
            docker stop $(docker ps -a)
            docker system prune -a -f
            docker rmi $(docker images -a -q)
@@ -69,4 +66,3 @@ jobs:
 #        deploy_targets: '65.21.61.198'
 #        ssh_user: 'deploy'
 #        compose_file: 'docker-compose.yml'
-#
