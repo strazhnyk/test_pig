@@ -16,20 +16,21 @@ jobs:
     - name: Docker push
       run: docker push ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
 
-#  deploy:
-#    needs: build_and_pub
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Deploy using shh
-#      uses: appleboy/ssh-action@master
-#      with:
-#       host: 65.21.61.198
-#       username: deploy
-#       key: ${{ secrets.KEY }}
-#       port: 22
-#       script: |
-#           docker kill $(docker ps -q)
-#           docker prune -a
+  deploy:
+    needs: build_and_pub
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy using shh
+      uses: appleboy/ssh-action@master
+      with:
+       host: 65.21.61.198
+       username: deploy
+       key: ${{ secrets.KEY }}
+       port: 22
+       script: |
+           docker kill $(docker ps -q)
+           docker prune -a
+           docker-compose up
 #           docker pull ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
 #           docker run --name flask -d strazhnyk/flask:main
 
@@ -48,19 +49,20 @@ jobs:
 #       stack_file_name: docker-compose.yml
 #       args: up -d
 
-  deploy_compose2:
-    needs: build_and_pub
-    runs-on: ubuntu-latest
-    steps:
-    - name: add SSH
-      uses: shimataro/ssh-key-action@v2.3.1
-      with:
-        key: ${{ secrets.PRIVATE_KEY }}
-        known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-        if_key_exists: replace
-    - name: deploy
-      uses: JorgenVatle/docker-compose-deploy@v1.0
-      with:
-        deploy_targets: '65.21.61.198'
-        ssh_user: 'deploy'
-        compose_file: 'docker-compose.yml'
+#  deploy_compose2:
+#    needs: build_and_pub
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: add SSH
+#      uses: shimataro/ssh-key-action@v2.3.1
+#      with:
+#        key: ${{ secrets.PRIVATE_KEY }}
+#        known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+#        if_key_exists: replace
+#    - name: deploy
+#      uses: JorgenVatle/docker-compose-deploy@v1.0
+#      with:
+#        deploy_targets: '65.21.61.198'
+#        ssh_user: 'deploy'
+#        compose_file: 'docker-compose.yml'
+#
