@@ -30,6 +30,7 @@ jobs:
        script: |
            docker kill $(docker ps -q)
            docker prune -a
+           docker rmi $(docker images -a -q)
            docker-compose up
 #           docker pull ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
 #           docker run --name flask -d strazhnyk/flask:main
