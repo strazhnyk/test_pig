@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Deploy using shh
-    - uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@master
       with:
        host: 65.21.61.198
        username: deploy
