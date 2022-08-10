@@ -28,9 +28,11 @@ jobs:
        key: ${{ secrets.KEY }}
        port: 22
        script: |
-           docker stop $(docker ps -a)
-           docker system prune -a -f
-           docker rmi $(docker images -a -q)
+           cd ~/test2
+           docker-compose down
+#           docker stop $(docker ps -a)
+#           docker system prune -a -f
+#           docker rmi $(docker images -a -q)
            docker-compose up -d
 #           docker pull ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
 #           docker run --name flask -d strazhnyk/flask:main
