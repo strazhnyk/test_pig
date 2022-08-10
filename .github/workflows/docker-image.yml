@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Deploy using shh
-      uses: appleboy/ssh-action@master
+    - uses: appleboy/ssh-action@master
       with:
        host: 65.21.61.198
        username: deploy
@@ -30,9 +30,6 @@ jobs:
        script: |
            cd ~/test2
            docker-compose down
-#           docker stop $(docker ps -a)
-#           docker system prune -a -f
-#           docker rmi $(docker images -a -q)
            docker-compose up -d
 #           docker pull ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
 #           docker run --name flask -d strazhnyk/flask:main
