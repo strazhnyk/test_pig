@@ -1,8 +1,8 @@
 name: Docker Flask CI/CD
 
-on:
-  push:
-    branches: [ "main" ]
+#on:
+#  push:
+#    branches: [ "main" ]
 
 jobs:
   build_and_pub:
@@ -29,6 +29,7 @@ jobs:
        port: 22
        script: |
            cd ~/test2
+           docker-compose pull
            docker-compose down
            docker-compose up -d
 #           docker pull ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
