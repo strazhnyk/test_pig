@@ -25,7 +25,7 @@ jobs:
       with:
        host: ${{ secrets.HOST }}
        username: deploy
-       key: ${{ secrets.DEPLOY_KEY }}
+       key: ${{ secrets.KEY }}
        port: 22
 #       script: |
 #           docker pull ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
