@@ -1,8 +1,8 @@
 name: Docker Flask CI/CD
 
-#on:
-#  push:
-#    branches: [ "main" ]
+on:
+  push:
+    branches: [ "main" ]
 
 jobs:
   build_and_pub:
@@ -23,46 +23,10 @@ jobs:
     - name: Deploy using shh
       uses: appleboy/ssh-action@master
       with:
-       host: 65.21.61.198
+       host: ${{ secrets.HOST }}
        username: deploy
-       key: ${{ secrets.KEY }}
+       key: ${{ secrets.DEPLOY_KEY }}
        port: 22
        script: |
-           cd ~/test2
-           docker-compose pull
-           docker-compose down
-           docker-compose up -d
 #           docker pull ${{ secrets.DOCKER_LOGIN }}/flask:${GITHUB_REF:11}
 #           docker run --name flask -d strazhnyk/flask:main
-
-#  deploy_compose:
-#    needs: build_and_pub
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: Deploy compose usign ssh
-#      uses: wshihadeh/docker-deployment-action@v2
-#      with:
-#       remote_docker_host: deploy@65.21.61.198
-#       ssh_private_key: ${{ secrets.PRIVATE_KEY }}
-#       ssh_public_key: ${{ secrets.HOST_PUB_KEY }}
-#       copy_stack_file: true
-#       deploy_path: /home/deploy
-#       stack_file_name: docker-compose.yml
-#       args: up -d
-
-#  deploy_compose2:
-#    needs: build_and_pub
-#    runs-on: ubuntu-latest
-#    steps:
-#    - name: add SSH
-#      uses: shimataro/ssh-key-action@v2.3.1
-#      with:
-#        key: ${{ secrets.PRIVATE_KEY }}
-#        known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-#        if_key_exists: replace
-#    - name: deploy
-#      uses: JorgenVatle/docker-compose-deploy@v1.0
-#      with:
-#        deploy_targets: '65.21.61.198'
-#        ssh_user: 'deploy'
-#        compose_file: 'docker-compose.yml'
