@@ -34,6 +34,8 @@ pipeline{
 	post {
 		always {
 			sh 'docker logout'
+			sshPublisher(publishers: [sshPublisherDesc(configName: 'Test-Deploy', transfers: [sshTransfer(excludes: '', execCommand: 'docker-compose down && docker-compose up -d && docker system prune -a -f', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'docker-compose.yml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+
 		}
 	}
 
